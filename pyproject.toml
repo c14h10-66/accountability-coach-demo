@@ -1,0 +1,21 @@
+[project]
+name = "accountability-coach-agent"
+version = "0.1.0"
+description = "A lightweight framework-free accountability coach agent for academic procrastination."
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0"]
+
+[project.scripts]
+accountability-coach = "accountability_coach.entrypoints.cli:main"
+accountability-coach-http = "accountability_coach.entrypoints.http_api:main"
+accountability-coach-chat = "accountability_coach.entrypoints.chat_cli:main"
+accountability-coach-wechat = "accountability_coach.entrypoints.wechat_official:main"
+accountability-coach-wechat-openclaw = "accountability_coach.entrypoints.wechat_openclaw:main"
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]

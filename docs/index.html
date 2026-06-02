@@ -1,0 +1,601 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Accountability Coach Agent Demo</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --ink: #202225;
+        --muted: #66707a;
+        --line: #d9dde2;
+        --paper: #fbfaf7;
+        --panel: #ffffff;
+        --teal: #247c77;
+        --teal-soft: #e3f2ef;
+        --coral: #c85e4a;
+        --coral-soft: #f8e6df;
+        --gold: #a97822;
+        --gold-soft: #f5ecd8;
+        --violet: #6956a5;
+        --violet-soft: #ebe7f6;
+        --shadow: 0 18px 50px rgba(32, 34, 37, 0.12);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        background:
+          linear-gradient(180deg, rgba(251, 250, 247, 0.96), rgba(246, 248, 247, 0.94)),
+          repeating-linear-gradient(90deg, rgba(36, 124, 119, 0.05) 0, rgba(36, 124, 119, 0.05) 1px, transparent 1px, transparent 48px);
+        color: var(--ink);
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+
+      button,
+      input,
+      select {
+        font: inherit;
+      }
+
+      .shell {
+        width: min(1180px, calc(100vw - 32px));
+        margin: 0 auto;
+        padding: 24px 0 32px;
+      }
+
+      .topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 12px 0 18px;
+      }
+
+      .identity {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        min-width: 0;
+      }
+
+      .mark {
+        display: grid;
+        width: 42px;
+        height: 42px;
+        place-items: center;
+        border-radius: 8px;
+        background: var(--teal);
+        color: white;
+        font-weight: 800;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: clamp(24px, 3vw, 38px);
+        line-height: 1.05;
+        letter-spacing: 0;
+      }
+
+      .subtitle {
+        margin: 4px 0 0;
+        color: var(--muted);
+        font-size: 15px;
+      }
+
+      .toolbar {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+      }
+
+      .button {
+        min-height: 40px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 0 14px;
+        background: var(--panel);
+        color: var(--ink);
+        cursor: pointer;
+      }
+
+      .button.primary {
+        border-color: var(--teal);
+        background: var(--teal);
+        color: white;
+      }
+
+      .button:focus-visible {
+        outline: 3px solid rgba(36, 124, 119, 0.25);
+        outline-offset: 2px;
+      }
+
+      .demo-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1.45fr) minmax(320px, 0.9fr);
+        gap: 18px;
+        align-items: stretch;
+      }
+
+      .panel {
+        min-width: 0;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.92);
+        box-shadow: var(--shadow);
+        overflow: hidden;
+      }
+
+      .panel-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        min-height: 58px;
+        padding: 14px 16px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .panel-title {
+        margin: 0;
+        font-size: 16px;
+        font-weight: 750;
+      }
+
+      .status-pill {
+        display: inline-flex;
+        align-items: center;
+        min-height: 28px;
+        border-radius: 999px;
+        padding: 0 10px;
+        background: var(--teal-soft);
+        color: var(--teal);
+        font-size: 13px;
+        font-weight: 700;
+        white-space: nowrap;
+      }
+
+      .chat {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        height: 586px;
+        padding: 16px;
+        overflow: auto;
+        scroll-behavior: smooth;
+      }
+
+      .message {
+        display: grid;
+        gap: 5px;
+        max-width: 82%;
+      }
+
+      .message.user {
+        align-self: flex-end;
+      }
+
+      .speaker {
+        color: var(--muted);
+        font-size: 12px;
+        font-weight: 700;
+        text-transform: uppercase;
+      }
+
+      .bubble {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 11px 12px;
+        background: var(--panel);
+        line-height: 1.45;
+        font-size: 15px;
+      }
+
+      .message.user .bubble {
+        border-color: rgba(36, 124, 119, 0.4);
+        background: var(--teal-soft);
+      }
+
+      .message.system .bubble {
+        border-color: rgba(169, 120, 34, 0.32);
+        background: var(--gold-soft);
+      }
+
+      .side {
+        display: grid;
+        grid-template-rows: auto auto minmax(0, 1fr);
+      }
+
+      .state-block {
+        padding: 16px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .state-block:last-child {
+        border-bottom: 0;
+      }
+
+      .label {
+        margin: 0 0 8px;
+        color: var(--muted);
+        font-size: 12px;
+        font-weight: 800;
+        text-transform: uppercase;
+      }
+
+      .metric-row {
+        display: grid;
+        grid-template-columns: 110px 1fr;
+        gap: 10px;
+        align-items: center;
+        margin: 10px 0;
+        font-size: 14px;
+      }
+
+      .meter {
+        height: 9px;
+        overflow: hidden;
+        border-radius: 999px;
+        background: #edf0f1;
+      }
+
+      .meter span {
+        display: block;
+        height: 100%;
+        width: var(--value);
+        border-radius: inherit;
+        background: var(--teal);
+        transition: width 280ms ease;
+      }
+
+      .meter.coral span {
+        background: var(--coral);
+      }
+
+      .chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .chip {
+        border-radius: 999px;
+        padding: 6px 9px;
+        background: #eef0f2;
+        color: #394047;
+        font-size: 13px;
+        font-weight: 650;
+      }
+
+      .chip.teal {
+        background: var(--teal-soft);
+        color: var(--teal);
+      }
+
+      .chip.coral {
+        background: var(--coral-soft);
+        color: var(--coral);
+      }
+
+      .chip.violet {
+        background: var(--violet-soft);
+        color: var(--violet);
+      }
+
+      .step-list {
+        display: grid;
+        gap: 8px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .step-list li {
+        display: grid;
+        grid-template-columns: 28px 1fr;
+        gap: 10px;
+        align-items: start;
+        color: #33383d;
+        font-size: 14px;
+        line-height: 1.35;
+      }
+
+      .step-index {
+        display: grid;
+        width: 28px;
+        height: 28px;
+        place-items: center;
+        border-radius: 8px;
+        background: #eef0f2;
+        color: var(--muted);
+        font-size: 12px;
+        font-weight: 800;
+      }
+
+      .step-list li.active .step-index {
+        background: var(--violet);
+        color: white;
+      }
+
+      .step-list li.done .step-index {
+        background: var(--teal);
+        color: white;
+      }
+
+      .lower {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 18px;
+        margin-top: 18px;
+      }
+
+      .note {
+        padding: 16px;
+      }
+
+      .note h2 {
+        margin: 0 0 8px;
+        font-size: 17px;
+      }
+
+      .note p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.55;
+        font-size: 14px;
+      }
+
+      code {
+        border-radius: 6px;
+        padding: 2px 5px;
+        background: #edf0f1;
+        color: #263038;
+      }
+
+      @media (max-width: 880px) {
+        .topbar,
+        .demo-grid,
+        .lower {
+          grid-template-columns: 1fr;
+        }
+
+        .topbar {
+          display: grid;
+          align-items: start;
+        }
+
+        .toolbar {
+          justify-content: flex-start;
+        }
+
+        .chat {
+          height: 520px;
+        }
+
+        .message {
+          max-width: 94%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="shell">
+      <header class="topbar">
+        <div class="identity">
+          <div class="mark" aria-hidden="true">AC</div>
+          <div>
+            <h1>Accountability Coach Agent</h1>
+            <p class="subtitle">A stateful conversational coach prototype for academic procrastination support.</p>
+          </div>
+        </div>
+        <div class="toolbar" aria-label="Demo controls">
+          <button class="button primary" id="nextBtn" type="button">Next Turn</button>
+          <button class="button" id="autoBtn" type="button">Auto Play</button>
+          <button class="button" id="resetBtn" type="button">Reset</button>
+        </div>
+      </header>
+
+      <section class="demo-grid" aria-label="Interactive demo">
+        <article class="panel">
+          <div class="panel-header">
+            <h2 class="panel-title">Scripted Conversation</h2>
+            <span class="status-pill" id="turnStatus">Ready</span>
+          </div>
+          <div class="chat" id="chatLog" aria-live="polite"></div>
+        </article>
+
+        <aside class="panel side" aria-label="Coach state">
+          <div class="panel-header">
+            <h2 class="panel-title">Internal State</h2>
+            <span class="status-pill">Demo View</span>
+          </div>
+          <section class="state-block">
+            <p class="label">Student Profile</p>
+            <div class="chips">
+              <span class="chip teal">Graduate student</span>
+              <span class="chip violet">HCI</span>
+              <span class="chip">Literature review</span>
+            </div>
+          </section>
+          <section class="state-block">
+            <p class="label">Adaptive Signals</p>
+            <div class="metric-row">
+              <span>Progress</span>
+              <div class="meter"><span id="progressMeter" style="--value: 0%"></span></div>
+            </div>
+            <div class="metric-row">
+              <span>Stress</span>
+              <div class="meter coral"><span id="stressMeter" style="--value: 15%"></span></div>
+            </div>
+            <div class="chips" id="signalChips">
+              <span class="chip">No check-in yet</span>
+            </div>
+          </section>
+          <section class="state-block">
+            <p class="label">Dialogue Flow</p>
+            <ol class="step-list" id="steps">
+              <li class="active"><span class="step-index">1</span><span>Set coaching contract and goal context</span></li>
+              <li><span class="step-index">2</span><span>Create academic writing task</span></li>
+              <li><span class="step-index">3</span><span>Plan focused work block</span></li>
+              <li><span class="step-index">4</span><span>Process progress and emotion check-in</span></li>
+              <li><span class="step-index">5</span><span>Return adaptive guidance and commitment</span></li>
+            </ol>
+          </section>
+        </aside>
+      </section>
+
+      <section class="lower" aria-label="Project notes">
+        <article class="panel note">
+          <h2>Research Framing</h2>
+          <p>This is a coach demo, not a virtual patient. It shows related preparation for embodied conversational AI work: structured profile design, dialogue state, affect-sensitive adaptation, response boundaries, and evaluation-oriented prototyping.</p>
+        </article>
+        <article class="panel note">
+          <h2>Run The Code</h2>
+          <p>Use <code>python examples/full_loop_demo.py</code> for the end-to-end scenario, or <code>python -m pytest -q</code> to run the core behavior tests after activating a Python 3.11+ environment.</p>
+        </article>
+      </section>
+    </main>
+
+    <script>
+      const turns = [
+        {
+          speaker: "system",
+          name: "Coordinator",
+          text: "Supervision configured: gentle style, moderate intensity, goal = finish the literature review.",
+          progress: 0,
+          stress: 15,
+          chips: ["Goal context", "Gentle style", "Moderate intensity"],
+          step: 0
+        },
+        {
+          speaker: "user",
+          name: "Student",
+          text: "I need to draft my literature review outline, but I keep putting it off.",
+          progress: 0,
+          stress: 35,
+          chips: ["Writing task", "Avoidance signal"],
+          step: 1
+        },
+        {
+          speaker: "coach",
+          name: "Coach",
+          text: "Let's make the first block concrete: 25 minutes to group your sources into three themes, then a short break. The task is urgent and important, so we start small but visible.",
+          progress: 10,
+          stress: 30,
+          chips: ["25 min focus", "Urgent", "Important"],
+          step: 2
+        },
+        {
+          speaker: "user",
+          name: "Student",
+          text: "I did about 45 percent. I started, but I got tired and unsure how to structure the sources.",
+          progress: 45,
+          stress: 58,
+          chips: ["Partial check-in", "Tired", "Uncertainty"],
+          step: 3
+        },
+        {
+          speaker: "coach",
+          name: "Coach",
+          text: "Good, this is usable progress. For the next step, choose one theme and write only three bullet points: claim, source, and gap. I will lower the load and keep the next commitment narrow.",
+          progress: 55,
+          stress: 40,
+          chips: ["Load adjusted", "Next commitment", "Supportive reframing"],
+          step: 4
+        }
+      ];
+
+      const chatLog = document.querySelector("#chatLog");
+      const nextBtn = document.querySelector("#nextBtn");
+      const autoBtn = document.querySelector("#autoBtn");
+      const resetBtn = document.querySelector("#resetBtn");
+      const turnStatus = document.querySelector("#turnStatus");
+      const progressMeter = document.querySelector("#progressMeter");
+      const stressMeter = document.querySelector("#stressMeter");
+      const signalChips = document.querySelector("#signalChips");
+      const steps = Array.from(document.querySelectorAll("#steps li"));
+
+      let index = 0;
+      let timer = null;
+
+      function addTurn(turn) {
+        const item = document.createElement("div");
+        item.className = `message ${turn.speaker}`;
+        item.innerHTML = `<span class="speaker">${turn.name}</span><div class="bubble">${turn.text}</div>`;
+        chatLog.appendChild(item);
+        chatLog.scrollTop = chatLog.scrollHeight;
+        progressMeter.style.setProperty("--value", `${turn.progress}%`);
+        stressMeter.style.setProperty("--value", `${turn.stress}%`);
+        signalChips.innerHTML = turn.chips.map((chip, chipIndex) => {
+          const tone = chipIndex === 0 ? "teal" : chipIndex === 1 ? "coral" : "violet";
+          return `<span class="chip ${tone}">${chip}</span>`;
+        }).join("");
+        steps.forEach((step, stepIndex) => {
+          step.className = stepIndex < turn.step ? "done" : stepIndex === turn.step ? "active" : "";
+        });
+        turnStatus.textContent = `Turn ${Math.min(index + 1, turns.length)} of ${turns.length}`;
+      }
+
+      function nextTurn() {
+        if (index >= turns.length) {
+          stopAuto();
+          turnStatus.textContent = "Complete";
+          return;
+        }
+        addTurn(turns[index]);
+        index += 1;
+        if (index >= turns.length) {
+          nextBtn.textContent = "Complete";
+        }
+      }
+
+      function resetDemo() {
+        stopAuto();
+        index = 0;
+        chatLog.innerHTML = "";
+        progressMeter.style.setProperty("--value", "0%");
+        stressMeter.style.setProperty("--value", "15%");
+        signalChips.innerHTML = '<span class="chip">No check-in yet</span>';
+        steps.forEach((step, stepIndex) => {
+          step.className = stepIndex === 0 ? "active" : "";
+        });
+        turnStatus.textContent = "Ready";
+        nextBtn.textContent = "Next Turn";
+      }
+
+      function stopAuto() {
+        if (timer) {
+          window.clearInterval(timer);
+          timer = null;
+          autoBtn.textContent = "Auto Play";
+        }
+      }
+
+      nextBtn.addEventListener("click", nextTurn);
+      resetBtn.addEventListener("click", resetDemo);
+      autoBtn.addEventListener("click", () => {
+        if (timer) {
+          stopAuto();
+          return;
+        }
+        autoBtn.textContent = "Pause";
+        nextTurn();
+        timer = window.setInterval(() => {
+          if (index >= turns.length) {
+            stopAuto();
+            turnStatus.textContent = "Complete";
+            return;
+          }
+          nextTurn();
+        }, 1500);
+      });
+    </script>
+  </body>
+</html>
