@@ -17,7 +17,7 @@ Use this project as evidence of a complete HCI research workflow:
 ## Short Email Snippet
 
 ```text
-I also packaged a small GitHub demo and poster-style page for my thesis work:
+I also packaged a small GitHub demo and research overview page for my thesis work:
 
 [link]
 

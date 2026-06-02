@@ -96,6 +96,31 @@
         justify-content: flex-end;
       }
 
+      .research-entry {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 16px;
+        align-items: center;
+        margin: 0 0 18px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 16px;
+        background: rgba(255, 255, 255, 0.9);
+        box-shadow: var(--shadow);
+      }
+
+      .research-entry h2 {
+        margin: 0 0 5px;
+        font-size: 17px;
+      }
+
+      .research-entry p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 14px;
+        line-height: 1.5;
+      }
+
       .button {
         display: inline-flex;
         align-items: center;
@@ -366,7 +391,8 @@
       @media (max-width: 880px) {
         .topbar,
         .demo-grid,
-        .lower {
+        .lower,
+        .research-entry {
           grid-template-columns: 1fr;
         }
 
@@ -377,6 +403,10 @@
 
         .toolbar {
           justify-content: flex-start;
+        }
+
+        .research-entry .button {
+          width: fit-content;
         }
 
         .chat {
@@ -400,12 +430,19 @@
           </div>
         </div>
         <div class="toolbar" aria-label="Demo controls">
-          <a class="button" href="thesis.html" target="_blank" rel="noopener">Thesis Poster</a>
           <button class="button primary" id="nextBtn" type="button">Next Turn</button>
           <button class="button" id="autoBtn" type="button">Auto Play</button>
           <button class="button" id="resetBtn" type="button">Reset</button>
         </div>
       </header>
+
+      <section class="research-entry" aria-label="Thesis research overview">
+        <div>
+          <h2>Thesis Research Overview</h2>
+          <p>Fieldwork, design pattern, system architecture, study design, and evaluation results for the accountability coach thesis.</p>
+        </div>
+        <a class="button" href="thesis.html" target="_blank" rel="noopener">Open Research Overview</a>
+      </section>
 
       <section class="demo-grid" aria-label="Interactive demo">
         <article class="panel">
