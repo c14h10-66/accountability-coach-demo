@@ -5,7 +5,7 @@ A lightweight conversational coach prototype for academic procrastination suppor
 This repository is a portfolio/demo version of my thesis work. It explores how human accountability coaching practices can be translated into a stateful dialogue system with onboarding, task planning, check-ins, emotional support, adaptive guidance, and risk-aware boundaries.
 
 **Demo page:** open `docs/index.html` locally, or publish the `docs/` folder with GitHub Pages.  
-**Thesis poster:** `docs/thesis.html`  
+**Thesis research overview:** `docs/thesis.html`  
 **Core demo:** `examples/full_loop_demo.py`  
 **Status:** research prototype, not a clinical or production support tool.
 
@@ -72,7 +72,7 @@ src/accountability_coach/     Core agent, dialogue policy, modules, adapters
 examples/full_loop_demo.py    Minimal end-to-end scenario
 tests/test_acsp_core.py       Unit tests for core behavior and adapters
 docs/index.html               Static interactive demo page for quick viewing
-docs/thesis.html              HCI-poster-style overview of the thesis work
+docs/thesis.html              Structured visual overview of the thesis work
 docs/architecture_notes.md    Architecture mapping and design rationale
 docs/research_positioning.md  Concise thesis presentation framing
 skills/                       Human-readable coaching strategy SOPs

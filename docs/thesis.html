@@ -3,14 +3,13 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Thesis Poster | Accountability-Driven Coach Agent</title>
+    <title>Thesis Research | Accountability-Driven Coach Agent</title>
     <style>
       :root {
         color-scheme: light;
         --ink: #202225;
         --muted: #626d76;
         --line: #d8dde1;
-        --paper: #faf8f4;
         --panel: #ffffff;
         --teal: #247c77;
         --teal-soft: #e3f2ef;
@@ -20,6 +19,8 @@
         --gold-soft: #f5ecd8;
         --violet: #6956a5;
         --violet-soft: #ebe7f6;
+        --blue: #3e6d9c;
+        --blue-soft: #e5edf6;
         --ink-soft: #30363b;
         --shadow: 0 18px 44px rgba(32, 34, 37, 0.1);
       }
@@ -42,7 +43,7 @@
         color: inherit;
       }
 
-      .poster {
+      .research-page {
         width: min(1240px, calc(100vw - 32px));
         margin: 0 auto;
         padding: 24px 0 34px;
@@ -170,6 +171,10 @@
         grid-column: span 5;
       }
 
+      .span-6 {
+        grid-column: span 6;
+      }
+
       .span-7 {
         grid-column: span 7;
       }
@@ -195,93 +200,135 @@
         font-size: 15px;
       }
 
-      .question {
+      .question-map {
         display: grid;
-        gap: 10px;
-      }
-
-      .question p {
-        border-left: 4px solid var(--teal);
-        padding-left: 12px;
-        color: var(--ink-soft);
-        font-weight: 650;
-      }
-
-      .flow {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 10px;
-      }
-
-      .flow-step {
-        min-height: 132px;
-        border: 1px solid var(--line);
-        border-radius: 8px;
-        background: #fbfcfc;
-        padding: 13px;
-      }
-
-      .flow-step b {
-        display: block;
-        margin-bottom: 8px;
-        color: var(--ink);
-        font-size: 14px;
-      }
-
-      .flow-step span {
-        color: var(--muted);
-        font-size: 13px;
-        line-height: 1.45;
-      }
-
-      .architecture {
-        display: grid;
-        grid-template-columns: 1fr 1.45fr 1fr;
         gap: 12px;
-        align-items: stretch;
       }
 
-      .arch-column {
+      .question-card {
         display: grid;
-        gap: 10px;
-      }
-
-      .arch-node {
-        display: grid;
-        align-content: center;
-        min-height: 68px;
+        grid-template-columns: 42px 1fr;
+        gap: 12px;
+        align-items: center;
         border: 1px solid var(--line);
         border-radius: 8px;
         background: #fbfcfc;
         padding: 12px;
       }
 
-      .arch-node.center {
-        min-height: 260px;
-        border-color: rgba(36, 124, 119, 0.45);
+      .question-card b {
+        display: grid;
+        width: 42px;
+        height: 42px;
+        place-items: center;
+        border-radius: 8px;
         background: var(--teal-soft);
-        text-align: center;
+        color: var(--teal);
+        font-size: 15px;
       }
 
-      .arch-node b {
+      .question-card span {
+        color: var(--ink-soft);
+        font-size: 14px;
+        line-height: 1.45;
+        font-weight: 650;
+      }
+
+      .pipeline {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 10px;
+        position: relative;
+      }
+
+      .pipeline-step {
+        display: grid;
+        grid-template-rows: auto 1fr;
+        gap: 10px;
+        min-height: 150px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #fbfcfc;
+        padding: 13px;
+      }
+
+      .step-top {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .step-dot {
+        display: grid;
+        width: 30px;
+        height: 30px;
+        place-items: center;
+        border-radius: 8px;
+        background: var(--teal);
+        color: white;
+        font-size: 13px;
+        font-weight: 850;
+      }
+
+      .pipeline-step b {
         color: var(--ink);
         font-size: 14px;
       }
 
-      .arch-node span {
-        margin-top: 4px;
+      .pipeline-step span {
         color: var(--muted);
         font-size: 13px;
-        line-height: 1.35;
+        line-height: 1.45;
       }
 
-      .chips {
+      .layer-map {
+        display: grid;
+        gap: 10px;
+      }
+
+      .layer-band {
+        display: grid;
+        grid-template-columns: 136px 1fr;
+        gap: 12px;
+        align-items: stretch;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        overflow: hidden;
+        background: #fbfcfc;
+      }
+
+      .layer-name {
+        display: grid;
+        place-items: center;
+        padding: 12px;
+        color: white;
+        font-size: 13px;
+        font-weight: 850;
+        text-align: center;
+        text-transform: uppercase;
+      }
+
+      .foundational .layer-name {
+        background: var(--teal);
+      }
+
+      .operational .layer-name {
+        background: var(--violet);
+      }
+
+      .regulatory .layer-name {
+        background: var(--coral);
+      }
+
+      .layer-body {
         display: flex;
         flex-wrap: wrap;
         gap: 8px;
+        align-items: center;
+        padding: 12px;
       }
 
-      .chip {
+      .pill {
         border-radius: 999px;
         padding: 7px 10px;
         background: #eef0f2;
@@ -290,52 +337,161 @@
         font-weight: 700;
       }
 
-      .chip.teal {
-        background: var(--teal-soft);
-        color: var(--teal);
+      .system-diagram {
+        display: grid;
+        grid-template-columns: 1fr 1.05fr 1.45fr 1fr;
+        gap: 12px;
+        align-items: stretch;
       }
 
-      .chip.coral {
-        background: var(--coral-soft);
-        color: var(--coral);
-      }
-
-      .chip.violet {
-        background: var(--violet-soft);
-        color: var(--violet);
-      }
-
-      .chip.gold {
-        background: var(--gold-soft);
-        color: var(--gold);
-      }
-
-      .layer-list {
+      .diagram-lane {
         display: grid;
         gap: 10px;
       }
 
-      .layer {
+      .diagram-label {
+        color: var(--muted);
+        font-size: 12px;
+        font-weight: 850;
+        text-transform: uppercase;
+      }
+
+      .node {
         display: grid;
-        grid-template-columns: 112px 1fr;
-        gap: 12px;
-        align-items: start;
+        align-content: center;
+        min-height: 74px;
         border: 1px solid var(--line);
         border-radius: 8px;
         background: #fbfcfc;
         padding: 12px;
       }
 
-      .layer b {
-        color: var(--teal);
-        font-size: 13px;
-        text-transform: uppercase;
+      .node.primary {
+        min-height: 206px;
+        border-color: rgba(36, 124, 119, 0.45);
+        background: var(--teal-soft);
+        text-align: center;
       }
 
-      .layer span {
-        color: var(--muted);
+      .node b {
+        color: var(--ink);
         font-size: 14px;
-        line-height: 1.45;
+      }
+
+      .node span {
+        margin-top: 5px;
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.35;
+      }
+
+      .module-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+      }
+
+      .module {
+        min-height: 74px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 11px;
+        background: #fbfcfc;
+      }
+
+      .module b {
+        display: block;
+        color: var(--ink);
+        font-size: 13px;
+      }
+
+      .module span {
+        display: block;
+        margin-top: 4px;
+        color: var(--muted);
+        font-size: 12px;
+        line-height: 1.35;
+      }
+
+      .study-design {
+        display: grid;
+        grid-template-columns: 1fr 1.25fr 1fr;
+        gap: 12px;
+        align-items: stretch;
+      }
+
+      .study-col {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #fbfcfc;
+        padding: 12px;
+      }
+
+      .study-col h3 {
+        margin: 0 0 10px;
+        font-size: 14px;
+      }
+
+      .study-col .pill {
+        display: block;
+        width: fit-content;
+        margin: 8px 0;
+      }
+
+      .condition-stack {
+        display: grid;
+        gap: 8px;
+      }
+
+      .condition {
+        border-radius: 8px;
+        padding: 10px;
+        color: var(--ink-soft);
+        font-size: 13px;
+        font-weight: 750;
+      }
+
+      .condition.ai {
+        background: var(--teal-soft);
+        color: var(--teal);
+      }
+
+      .condition.human {
+        background: var(--violet-soft);
+        color: var(--violet);
+      }
+
+      .condition.control {
+        background: var(--gold-soft);
+        color: var(--gold);
+      }
+
+      .loop-diagram {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 9px;
+      }
+
+      .loop-step {
+        display: grid;
+        align-content: center;
+        min-height: 96px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 10px;
+        background: #fbfcfc;
+      }
+
+      .loop-step b {
+        color: var(--ink);
+        font-size: 13px;
+      }
+
+      .loop-step span {
+        margin-top: 4px;
+        color: var(--muted);
+        font-size: 12px;
+        line-height: 1.35;
       }
 
       .bars {
@@ -345,7 +501,7 @@
 
       .bar-row {
         display: grid;
-        grid-template-columns: 135px 1fr 62px;
+        grid-template-columns: 135px 1fr 70px;
         gap: 10px;
         align-items: center;
         font-size: 14px;
@@ -370,6 +526,10 @@
         background: var(--coral);
       }
 
+      .bar.violet {
+        background: var(--violet);
+      }
+
       .result-note {
         margin-top: 12px;
         color: var(--muted);
@@ -377,50 +537,47 @@
         line-height: 1.5;
       }
 
-      .quote {
-        border-left: 4px solid var(--coral);
-        padding-left: 13px;
-        color: var(--ink-soft);
-        font-size: 15px;
-        line-height: 1.5;
-        font-weight: 650;
-      }
-
-      .takeaways {
+      .finding-grid {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 12px;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 10px;
       }
 
-      .takeaway {
+      .finding {
+        min-height: 102px;
         border: 1px solid var(--line);
         border-radius: 8px;
+        padding: 12px;
         background: #fbfcfc;
-        padding: 14px;
       }
 
-      .takeaway b {
+      .finding b {
         display: block;
-        margin-bottom: 7px;
         color: var(--ink);
+        font-size: 13px;
       }
 
-      .takeaway span {
+      .finding span {
+        display: block;
+        margin-top: 6px;
         color: var(--muted);
-        font-size: 14px;
-        line-height: 1.45;
+        font-size: 12px;
+        line-height: 1.35;
       }
 
       @media (max-width: 980px) {
         .hero,
-        .architecture,
-        .flow,
-        .takeaways {
+        .pipeline,
+        .system-diagram,
+        .study-design,
+        .loop-diagram,
+        .finding-grid {
           grid-template-columns: 1fr;
         }
 
         .span-4,
         .span-5,
+        .span-6,
         .span-7,
         .span-8,
         .span-12 {
@@ -438,7 +595,7 @@
       }
 
       @media (max-width: 620px) {
-        .poster {
+        .research-page {
           width: min(100vw - 22px, 1240px);
           padding-top: 14px;
         }
@@ -448,19 +605,20 @@
           padding: 15px;
         }
 
-        .layer,
+        .question-card,
+        .layer-band,
         .bar-row {
           grid-template-columns: 1fr;
         }
 
-        .flow-step {
-          min-height: auto;
+        .layer-name {
+          min-height: 44px;
         }
       }
     </style>
   </head>
   <body>
-    <main class="poster">
+    <main class="research-page">
       <nav class="topnav" aria-label="Page navigation">
         <a class="back-link" href="index.html">Back to demo</a>
         <div class="author">Zifei Liu | MSc Interactive Media Technology | KTH Royal Institute of Technology</div>
@@ -468,7 +626,7 @@
 
       <section class="hero" aria-label="Thesis overview">
         <article class="hero-main">
-          <p class="eyebrow">MSc Thesis Work</p>
+          <p class="eyebrow">MSc Thesis Research</p>
           <h1>More Than Supervision: Accountability-Driven Coach Agent for Mitigating Academic Procrastination</h1>
           <p class="thesis-line">An HCI research project translating real accountability coaching practices into an LLM-based conversational agent, then evaluating the prototype through a mixed-method user study.</p>
         </article>
@@ -488,111 +646,164 @@
         </aside>
       </section>
 
-      <section class="grid" aria-label="Poster sections">
-        <article class="panel span-5 question">
+      <section class="grid" aria-label="Research overview sections">
+        <article class="panel span-5">
           <h2>Research Questions</h2>
-          <p>How do accountability coaches and clients describe the interaction mechanisms that support academic self-regulation?</p>
-          <p>How can those mechanisms be translated into a stateful LLM-driven conversational coach?</p>
+          <div class="question-map">
+            <div class="question-card">
+              <b>RQ1</b>
+              <span>How do accountability coaches and clients describe mechanisms that support academic self-regulation?</span>
+            </div>
+            <div class="question-card">
+              <b>RQ2</b>
+              <span>How can these mechanisms be translated into a stateful LLM-driven conversational coach?</span>
+            </div>
+          </div>
         </article>
 
         <article class="panel span-7">
           <h2>Human-Centered Research Pipeline</h2>
-          <div class="flow" aria-label="Research pipeline">
-            <div class="flow-step">
-              <b>1. Fieldwork</b>
-              <span>Semi-structured interviews with real accountability coaches and clients.</span>
+          <div class="pipeline" aria-label="Research pipeline">
+            <div class="pipeline-step">
+              <div class="step-top"><span class="step-dot">1</span><b>Fieldwork</b></div>
+              <span>Semi-structured interviews with accountability coaches and clients.</span>
             </div>
-            <div class="flow-step">
-              <b>2. Pattern Distillation</b>
-              <span>Accountability Coaching Service Pattern with foundational, operational, and regulatory layers.</span>
+            <div class="pipeline-step">
+              <div class="step-top"><span class="step-dot">2</span><b>Pattern</b></div>
+              <span>Distilled ACSP: foundational, operational, and regulatory layers.</span>
             </div>
-            <div class="flow-step">
-              <b>3. System Prototype</b>
-              <span>Central coordinator, sub-agents, shared memory, intent routing, and adaptive response aggregation.</span>
+            <div class="pipeline-step">
+              <div class="step-top"><span class="step-dot">3</span><b>Prototype</b></div>
+              <span>Implemented coordinator, modules, memory, routing, and adaptation.</span>
             </div>
-            <div class="flow-step">
-              <b>4. Evaluation</b>
-              <span>4-week randomized mixed-method study with quantitative PASS outcomes and qualitative interviews.</span>
+            <div class="pipeline-step">
+              <div class="step-top"><span class="step-dot">4</span><b>Evaluation</b></div>
+              <span>4-week mixed-method study with PASS outcomes and interviews.</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="panel span-12">
+          <h2>Accountability Coaching Service Pattern</h2>
+          <div class="layer-map" aria-label="ACSP layer model">
+            <div class="layer-band foundational">
+              <div class="layer-name">Foundational Layer</div>
+              <div class="layer-body">
+                <span class="pill">needs alignment</span>
+                <span class="pill">trust building</span>
+                <span class="pill">service boundaries</span>
+                <span class="pill">supervision intensity</span>
+                <span class="pill">academic context</span>
+              </div>
+            </div>
+            <div class="layer-band operational">
+              <div class="layer-name">Operational Layer</div>
+              <div class="layer-body">
+                <span class="pill">schedule planning</span>
+                <span class="pill">task tracking</span>
+                <span class="pill">task guidance</span>
+                <span class="pill">knowledge support</span>
+                <span class="pill">emotional support</span>
+                <span class="pill">Da Ka check-ins</span>
+              </div>
+            </div>
+            <div class="layer-band regulatory">
+              <div class="layer-name">Regulatory Layer</div>
+              <div class="layer-body">
+                <span class="pill">role adaptation</span>
+                <span class="pill">tone adaptation</span>
+                <span class="pill">load reduction</span>
+                <span class="pill">reminder calibration</span>
+                <span class="pill">risk boundary</span>
+              </div>
             </div>
           </div>
         </article>
 
         <article class="panel span-8">
           <h2>System Architecture</h2>
-          <div class="architecture" aria-label="System architecture">
-            <div class="arch-column">
-              <div class="arch-node">
-                <b>Intent Routing</b>
-                <span>Maps user turns into task, planning, tracking, support, or resource actions.</span>
+          <div class="system-diagram" aria-label="System architecture diagram">
+            <div class="diagram-lane">
+              <div class="diagram-label">Input</div>
+              <div class="node">
+                <b>User Turn</b>
+                <span>task, emotion, question, check-in, or planning request</span>
               </div>
-              <div class="arch-node">
-                <b>Shared State</b>
-                <span>Maintains goals, tasks, check-ins, emotional signals, and supervision preferences.</span>
-              </div>
-              <div class="arch-node">
-                <b>Response Policy</b>
-                <span>Aggregates module outputs into coherent coaching responses.</span>
+              <div class="node">
+                <b>Intent Router</b>
+                <span>selects relevant coach capability</span>
               </div>
             </div>
-            <div class="arch-node center">
-              <b>Central Coordinator</b>
-              <span>Synchronizes the full coaching loop across planning, task tracking, guidance, knowledge support, emotional support, and supervision customization.</span>
+            <div class="diagram-lane">
+              <div class="diagram-label">State</div>
+              <div class="node">
+                <b>Shared Memory</b>
+                <span>goals, profile, tasks, schedule, check-ins</span>
+              </div>
+              <div class="node">
+                <b>Adaptive Signals</b>
+                <span>progress, stress, morale, energy, self-efficacy</span>
+              </div>
             </div>
-            <div class="arch-column">
-              <div class="arch-node">
-                <b>Schedule Planning</b>
-                <span>Priority sorting, Pomodoro blocks, load adaptation.</span>
+            <div class="diagram-lane">
+              <div class="diagram-label">Coordination</div>
+              <div class="node primary">
+                <b>Central Coordinator</b>
+                <span>orchestrates modules, updates state, aggregates responses, and enforces boundaries.</span>
               </div>
-              <div class="arch-node">
-                <b>Task Tracking</b>
-                <span>Reminders, Da Ka check-ins, progress signals.</span>
-              </div>
-              <div class="arch-node">
-                <b>Support Modules</b>
-                <span>Task guidance, knowledge support, emotional support.</span>
+            </div>
+            <div class="diagram-lane">
+              <div class="diagram-label">Output</div>
+              <div class="module-grid">
+                <div class="module"><b>Plan</b><span>blocks and priorities</span></div>
+                <div class="module"><b>Track</b><span>reminders and check-ins</span></div>
+                <div class="module"><b>Guide</b><span>next step and reflection</span></div>
+                <div class="module"><b>Support</b><span>emotion-sensitive response</span></div>
               </div>
             </div>
           </div>
         </article>
 
         <article class="panel span-4">
-          <h2>Interaction Mechanisms</h2>
-          <div class="chips">
-            <span class="chip teal">needs alignment</span>
-            <span class="chip violet">trust building</span>
-            <span class="chip gold">adaptive reminders</span>
-            <span class="chip coral">emotion-sensitive load</span>
-            <span class="chip teal">reflection</span>
-            <span class="chip violet">pre-commitment</span>
-            <span class="chip gold">reward</span>
-            <span class="chip coral">context restructuring</span>
-            <span class="chip teal">knowledge grounding</span>
+          <h2>Intervention Loop</h2>
+          <div class="loop-diagram" aria-label="Intervention loop">
+            <div class="loop-step"><b>Align</b><span>goal, style, intensity</span></div>
+            <div class="loop-step"><b>Plan</b><span>schedule and task block</span></div>
+            <div class="loop-step"><b>Act</b><span>student attempts task</span></div>
+            <div class="loop-step"><b>Check In</b><span>progress and emotion</span></div>
+            <div class="loop-step"><b>Adapt</b><span>guidance, load, support</span></div>
           </div>
         </article>
 
-        <article class="panel span-5">
-          <h2>Accountability Coaching Service Pattern</h2>
-          <div class="layer-list">
-            <div class="layer">
-              <b>Foundational</b>
-              <span>Needs alignment, boundaries, coaching intensity, and trust calibration before intervention.</span>
+        <article class="panel span-6">
+          <h2>Study Design</h2>
+          <div class="study-design" aria-label="Study design diagram">
+            <div class="study-col">
+              <h3>Before</h3>
+              <span class="pill">PASS pre-test</span>
+              <span class="pill">participant profile</span>
             </div>
-            <div class="layer">
-              <b>Operational</b>
-              <span>Schedule planning, task tracking, guidance, knowledge support, and emotional support across the task lifecycle.</span>
+            <div class="study-col">
+              <h3>4-Week Condition</h3>
+              <div class="condition-stack">
+                <div class="condition ai">AI coach</div>
+                <div class="condition human">Human coach</div>
+                <div class="condition control">No intervention</div>
+              </div>
             </div>
-            <div class="layer">
-              <b>Regulatory</b>
-              <span>Role and tone adaptation based on progress, emotion, task difficulty, and user response.</span>
+            <div class="study-col">
+              <h3>After</h3>
+              <span class="pill">PASS post-test</span>
+              <span class="pill">qualitative interview</span>
             </div>
           </div>
         </article>
 
-        <article class="panel span-7">
+        <article class="panel span-6">
           <h2>Evaluation Results</h2>
           <div class="bars" aria-label="Evaluation results">
             <div class="bar-row">
-              <span>AI coach PASS reduction</span>
+              <span>AI PASS reduction</span>
               <div class="bar-track"><span class="bar" style="--value: 71%"></span></div>
               <strong>17.71%</strong>
             </div>
@@ -603,32 +814,31 @@
             </div>
             <div class="bar-row">
               <span>Effect size</span>
-              <div class="bar-track"><span class="bar" style="--value: 77%"></span></div>
+              <div class="bar-track"><span class="bar violet" style="--value: 77%"></span></div>
               <strong>eta_p^2 .504</strong>
             </div>
           </div>
-          <p class="result-note">One-way ANCOVA showed a significant intervention effect on post-test PASS, F(2,32) = 16.23, p &lt; .001. Compared with no intervention, the AI coach produced a lower adjusted post-test PASS score, mean difference -6.08, 95% CI [-8.67, -3.48].</p>
+          <p class="result-note">The AI coach produced a lower adjusted post-test PASS score than no intervention, mean difference -6.08, 95% CI [-8.67, -3.48].</p>
         </article>
 
-        <article class="panel span-4">
-          <h2>Qualitative Finding</h2>
-          <p class="quote">Participants experienced the AI coach as judgment-free, highly available, and standardized, which helped reduce social-evaluation anxiety and supported more honest check-ins.</p>
-        </article>
-
-        <article class="panel span-8">
-          <h2>Design Contributions</h2>
-          <div class="takeaways">
-            <div class="takeaway">
-              <b>From practice to pattern</b>
-              <span>Distilled real coaching interactions into a structured service pattern that can guide system design.</span>
+        <article class="panel span-12">
+          <h2>Qualitative Mechanism Findings</h2>
+          <div class="finding-grid" aria-label="Qualitative mechanism findings">
+            <div class="finding">
+              <b>Judgment-Free</b>
+              <span>Reduced social-evaluation anxiety and made honest check-ins easier.</span>
             </div>
-            <div class="takeaway">
-              <b>From pattern to prototype</b>
-              <span>Implemented a modular conversational agent with memory, routing, adaptation, and coordinated support.</span>
+            <div class="finding">
+              <b>Highly Available</b>
+              <span>Supported immediate help when motivation and task clarity dropped.</span>
             </div>
-            <div class="takeaway">
-              <b>From prototype to evidence</b>
-              <span>Evaluated the system with quantitative outcomes and qualitative accounts of interaction experience.</span>
+            <div class="finding">
+              <b>Standardized</b>
+              <span>Produced consistent planning and follow-up across repeated turns.</span>
+            </div>
+            <div class="finding">
+              <b>Complementary</b>
+              <span>Human coaching remained stronger for deep empathy and social accountability.</span>
             </div>
           </div>
         </article>
