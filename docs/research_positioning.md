@@ -1,43 +1,34 @@
-# Research Positioning
+# Thesis Presentation Framing
 
 ## One-Sentence Framing
 
-This is a previous conversational coach prototype, not a virtual patient system; it demonstrates my ability to design and implement stateful, human-centered conversational agents that could be adapted to embodied medical training scenarios.
+This thesis project investigates how real accountability coaching practices can be translated into an LLM-based conversational agent for academic procrastination intervention.
 
 ## How To Present It
 
-Use this project as evidence of preparation and fit:
+Use this project as evidence of a complete HCI research workflow:
 
-- I have built a working conversational agent prototype rather than only a concept.
-- I have experience translating human coaching practices into computational dialogue behavior.
-- I have worked with state, memory, task flow, adaptation, and supportive response design.
-- I understand that sensitive domains require boundaries, escalation logic, and evaluation beyond task success.
-- I want to apply this background to embodied interaction, especially Furhat-based virtual patients.
+- I conducted qualitative fieldwork with accountability coaches and clients.
+- I distilled interaction mechanisms into the Accountability Coaching Service Pattern.
+- I implemented a modular conversational agent with a central coordinator and five support modules.
+- I designed stateful interaction flows covering goals, tasks, check-ins, emotional signals, and adaptive support.
+- I evaluated the system through a 4-week randomized mixed-method study with N = 36.
 
-## What To Avoid Saying
-
-Do not describe this project as a virtual patient demo. It is better to say:
-
-> This is a related prior prototype. It focuses on academic coaching, but the architectural ideas transfer to virtual patient work: structured profiles, dialogue state, response policy, affect-sensitive behavior, and user-centered evaluation.
-
-## Possible Email Snippet
+## Short Email Snippet
 
 ```text
-I also prepared a small GitHub demo of a previous conversational coach prototype:
+I also packaged a small GitHub demo and poster-style page for my thesis work:
 
 [link]
 
-This is not a virtual patient system, but it shows my prior work with stateful dialogue design, supportive conversational agents, user-centered prototyping, and evaluation-oriented interaction design. I see this as relevant preparation for developing and evaluating a Furhat-based virtual patient system.
+The project investigates accountability-driven conversational agents for academic procrastination intervention. It includes qualitative fieldwork, pattern distillation, a working LLM-based coach prototype, and a 4-week mixed-method user evaluation.
 ```
 
-## Transfer To Furhat Virtual Patients
+## Main Points To Show
 
-The most relevant transferable components are:
-
-- structured persona/profile design
-- turn-by-turn dialogue management
-- controlled response boundaries
-- affect-aware response adaptation
-- interaction-state logging for evaluation
-- prototype-first research communication
-
+- research motivation: procrastination as a self-regulation and emotional support problem
+- empirical basis: interviews with 12 coaches and 12 clients
+- design pattern: foundational, operational, and regulatory layers of support
+- system implementation: central coordinator plus schedule, tracking, guidance, knowledge, and emotional support modules
+- evaluation: 4-week randomized mixed-method study with N = 36
+- findings: significant PASS reduction and qualitative evidence around availability, standardization, and judgment-free interaction

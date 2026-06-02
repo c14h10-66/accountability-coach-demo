@@ -2,24 +2,23 @@
 
 A lightweight conversational coach prototype for academic procrastination support.
 
-This repository is a portfolio/demo version of a previous conversational agent project. It explores how human coaching practices can be translated into a stateful dialogue system with onboarding, task planning, check-ins, emotional support, adaptive guidance, and risk-aware boundaries.
+This repository is a portfolio/demo version of my thesis work. It explores how human accountability coaching practices can be translated into a stateful dialogue system with onboarding, task planning, check-ins, emotional support, adaptive guidance, and risk-aware boundaries.
 
 **Demo page:** open `docs/index.html` locally, or publish the `docs/` folder with GitHub Pages.  
+**Thesis poster:** `docs/thesis.html`  
 **Core demo:** `examples/full_loop_demo.py`  
 **Status:** research prototype, not a clinical or production support tool.
 
 ## Why This Demo Matters
 
-This is not a virtual patient system. It is included as a related prototype because it demonstrates skills that transfer to embodied conversational agent research:
+This demo presents a complete HCI research workflow:
 
-- conversational agent prototyping
-- structured dialogue state and user memory
-- human-inspired supportive response design
-- user-centered coaching flows
-- evaluation-oriented system design
-- safety and boundary handling for sensitive interaction contexts
-
-For a Furhat-based virtual patient project, the transferable part is the interaction architecture: a structured profile, dialogue state, adaptive response policy, affect-sensitive behavior, and an evaluation plan focused on user perception and learning value.
+- qualitative fieldwork with accountability coaches and clients
+- pattern distillation into the Accountability Coaching Service Pattern
+- implementation of a modular LLM-based conversational coach
+- adaptive dialogue state, memory, task planning, and emotional support
+- mixed-method evaluation of the prototype in a 4-week study
+- safety and boundary handling for sensitive academic support contexts
 
 ## What The Prototype Includes
 
@@ -73,19 +72,20 @@ src/accountability_coach/     Core agent, dialogue policy, modules, adapters
 examples/full_loop_demo.py    Minimal end-to-end scenario
 tests/test_acsp_core.py       Unit tests for core behavior and adapters
 docs/index.html               Static interactive demo page for quick viewing
+docs/thesis.html              HCI-poster-style overview of the thesis work
 docs/architecture_notes.md    Architecture mapping and design rationale
-docs/research_positioning.md  How to present this demo to a Furhat professor
+docs/research_positioning.md  Concise thesis presentation framing
 skills/                       Human-readable coaching strategy SOPs
 ```
 
-## Positioning For MSc Thesis Discussion
+## Positioning For Thesis Discussion
 
-If shared with a professor, this project should be introduced as:
+If shared with a professor or reviewer, this project should be introduced as:
 
-> A previous conversational coach prototype demonstrating my experience with dialogue design, stateful interaction, supportive conversational agents, and evaluation-oriented prototyping. I would like to extend these skills toward embodied virtual patients and Furhat-based medical communication training.
+> My thesis prototype and study on accountability-driven conversational agents for academic procrastination intervention. It demonstrates the full path from fieldwork and pattern distillation to system implementation and mixed-method evaluation.
 
 See `docs/research_positioning.md` for a concise framing note.
 
 ## Safety Note
 
-The prototype is for research and design demonstration only. It does not provide medical, psychological, or crisis intervention services. Sensitive data, real user memory, API keys, and platform tokens should never be committed to the repository.
+The prototype is for research and design demonstration only. It does not provide professional counseling, diagnosis, or crisis intervention services. Sensitive data, real user memory, API keys, and platform tokens should never be committed to the repository.
