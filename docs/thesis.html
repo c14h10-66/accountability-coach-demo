@@ -494,20 +494,50 @@
         line-height: 1.35;
       }
 
-      .bars {
+      .result-metrics {
         display: grid;
-        gap: 12px;
+        gap: 10px;
       }
 
-      .bar-row {
+      .result-card {
         display: grid;
-        grid-template-columns: 135px 1fr 70px;
-        gap: 10px;
-        align-items: center;
-        font-size: 14px;
+        grid-template-columns: minmax(120px, 0.9fr) minmax(120px, 0.75fr);
+        gap: 12px;
+        align-items: start;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #fbfcfc;
+        padding: 12px;
+      }
+
+      .result-label {
+        display: block;
+        color: var(--muted);
+        font-size: 12px;
+        font-weight: 850;
+        line-height: 1.2;
+        text-transform: uppercase;
+      }
+
+      .result-detail {
+        display: block;
+        margin-top: 6px;
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.35;
+      }
+
+      .result-value {
+        color: var(--ink);
+        font-size: clamp(24px, 3vw, 34px);
+        font-weight: 850;
+        line-height: 1.05;
+        text-align: right;
+        white-space: nowrap;
       }
 
       .bar-track {
+        grid-column: 1 / -1;
         height: 12px;
         border-radius: 999px;
         background: #eceff1;
@@ -607,8 +637,12 @@
 
         .question-card,
         .layer-band,
-        .bar-row {
+        .result-card {
           grid-template-columns: 1fr;
+        }
+
+        .result-value {
+          text-align: left;
         }
 
         .layer-name {
@@ -801,21 +835,30 @@
 
         <article class="panel span-6">
           <h2>Evaluation Results</h2>
-          <div class="bars" aria-label="Evaluation results">
-            <div class="bar-row">
-              <span>AI PASS reduction</span>
+          <div class="result-metrics" aria-label="Evaluation results">
+            <div class="result-card">
+              <div>
+                <span class="result-label">AI coach PASS reduction</span>
+                <span class="result-detail">within-group decrease over the intervention</span>
+              </div>
+              <strong class="result-value">17.71%</strong>
               <div class="bar-track"><span class="bar" style="--value: 71%"></span></div>
-              <strong>17.71%</strong>
             </div>
-            <div class="bar-row">
-              <span>ANCOVA effect</span>
+            <div class="result-card">
+              <div>
+                <span class="result-label">ANCOVA intervention effect</span>
+                <span class="result-detail">post-test PASS across study conditions</span>
+              </div>
+              <strong class="result-value">p &lt; .001</strong>
               <div class="bar-track"><span class="bar coral" style="--value: 86%"></span></div>
-              <strong>p &lt; .001</strong>
             </div>
-            <div class="bar-row">
-              <span>Effect size</span>
+            <div class="result-card">
+              <div>
+                <span class="result-label">Effect size</span>
+                <span class="result-detail">partial eta squared from ANCOVA</span>
+              </div>
+              <strong class="result-value">ηp² = .504</strong>
               <div class="bar-track"><span class="bar violet" style="--value: 77%"></span></div>
-              <strong>eta_p^2 .504</strong>
             </div>
           </div>
           <p class="result-note">The AI coach produced a lower adjusted post-test PASS score than no intervention, mean difference -6.08, 95% CI [-8.67, -3.48].</p>
@@ -846,4 +889,3 @@
     </main>
   </body>
 </html>
-
