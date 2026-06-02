@@ -141,6 +141,11 @@
         color: white;
       }
 
+      .button:disabled {
+        cursor: default;
+        opacity: 0.58;
+      }
+
       .button:focus-visible {
         outline: 3px solid rgba(36, 124, 119, 0.25);
         outline-offset: 2px;
@@ -429,10 +434,10 @@
             <p class="subtitle">A stateful conversational coach prototype for academic procrastination support.</p>
           </div>
         </div>
-        <div class="toolbar" aria-label="Demo controls">
-          <button class="button primary" id="nextBtn" type="button">Next Turn</button>
-          <button class="button" id="autoBtn" type="button">Auto Play</button>
-          <button class="button" id="resetBtn" type="button">Reset</button>
+        <div class="toolbar" aria-label="Scenario controls">
+          <button class="button primary" id="nextBtn" type="button">Start Scenario</button>
+          <button class="button" id="autoBtn" type="button">Play Scenario</button>
+          <button class="button" id="resetBtn" type="button">Reset Scenario</button>
         </div>
       </header>
 
@@ -447,8 +452,8 @@
       <section class="demo-grid" aria-label="Interactive demo">
         <article class="panel">
           <div class="panel-header">
-            <h2 class="panel-title">Scripted Conversation</h2>
-            <span class="status-pill" id="turnStatus">Ready</span>
+            <h2 class="panel-title">Scenario Transcript</h2>
+            <span class="status-pill" id="turnStatus">Scenario Ready</span>
           </div>
           <div class="chat" id="chatLog" aria-live="polite"></div>
         </article>
@@ -567,7 +572,7 @@
       let index = 0;
       let timer = null;
 
-      function addTurn(turn) {
+      function addScenarioStep(turn) {
         const item = document.createElement("div");
         item.className = `message ${turn.speaker}`;
         item.innerHTML = `<span class="speaker">${turn.name}</span><div class="bubble">${turn.text}</div>`;
@@ -582,19 +587,19 @@
         steps.forEach((step, stepIndex) => {
           step.className = stepIndex < turn.step ? "done" : stepIndex === turn.step ? "active" : "";
         });
-        turnStatus.textContent = `Turn ${Math.min(index + 1, turns.length)} of ${turns.length}`;
+        turnStatus.textContent = `Step ${Math.min(index + 1, turns.length)} of ${turns.length}`;
       }
 
-      function nextTurn() {
+      function showNextStep() {
         if (index >= turns.length) {
-          stopAuto();
-          turnStatus.textContent = "Complete";
+          markScenarioComplete();
           return;
         }
-        addTurn(turns[index]);
+        addScenarioStep(turns[index]);
         index += 1;
+        nextBtn.textContent = "Show Next Step";
         if (index >= turns.length) {
-          nextBtn.textContent = "Complete";
+          markScenarioComplete();
         }
       }
 
@@ -608,19 +613,31 @@
         steps.forEach((step, stepIndex) => {
           step.className = stepIndex === 0 ? "active" : "";
         });
-        turnStatus.textContent = "Ready";
-        nextBtn.textContent = "Next Turn";
+        turnStatus.textContent = "Scenario Ready";
+        nextBtn.textContent = "Start Scenario";
+        nextBtn.disabled = false;
+        autoBtn.textContent = "Play Scenario";
+        autoBtn.disabled = false;
       }
 
       function stopAuto() {
         if (timer) {
           window.clearInterval(timer);
           timer = null;
-          autoBtn.textContent = "Auto Play";
+          autoBtn.textContent = "Play Scenario";
         }
       }
 
-      nextBtn.addEventListener("click", nextTurn);
+      function markScenarioComplete() {
+        stopAuto();
+        turnStatus.textContent = "Scenario Complete";
+        nextBtn.textContent = "Scenario Complete";
+        nextBtn.disabled = true;
+        autoBtn.textContent = "Play Scenario";
+        autoBtn.disabled = true;
+      }
+
+      nextBtn.addEventListener("click", showNextStep);
       resetBtn.addEventListener("click", resetDemo);
       autoBtn.addEventListener("click", () => {
         if (timer) {
@@ -628,14 +645,13 @@
           return;
         }
         autoBtn.textContent = "Pause";
-        nextTurn();
+        showNextStep();
         timer = window.setInterval(() => {
           if (index >= turns.length) {
-            stopAuto();
-            turnStatus.textContent = "Complete";
+            markScenarioComplete();
             return;
           }
-          nextTurn();
+          showNextStep();
         }, 1500);
       });
     </script>
