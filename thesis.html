@@ -193,6 +193,23 @@
         line-height: 1.2;
       }
 
+      .section-heading {
+        display: grid;
+        gap: 6px;
+        margin-bottom: 14px;
+      }
+
+      .section-heading h2 {
+        margin-bottom: 0;
+      }
+
+      .section-copy {
+        max-width: 760px;
+        color: var(--muted);
+        font-size: 14px;
+        line-height: 1.5;
+      }
+
       p {
         margin: 0;
         color: var(--muted);
@@ -283,12 +300,12 @@
 
       .layer-map {
         display: grid;
-        gap: 10px;
+        gap: 12px;
       }
 
       .layer-band {
         display: grid;
-        grid-template-columns: 136px 1fr;
+        grid-template-columns: 150px 1fr;
         gap: 12px;
         align-items: stretch;
         border: 1px solid var(--line);
@@ -358,6 +375,37 @@
         min-width: 760px;
       }
 
+      .evidence-layout {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(280px, 0.42fr);
+        gap: 14px;
+        align-items: start;
+      }
+
+      .paper-thumb {
+        margin: 0;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #ffffff;
+        padding: 10px;
+      }
+
+      .paper-thumb a {
+        display: block;
+      }
+
+      .paper-thumb img {
+        display: block;
+        width: 100%;
+        max-height: 260px;
+        object-fit: contain;
+        border-radius: 6px;
+      }
+
+      .paper-thumb.tall img {
+        max-height: 320px;
+      }
+
       .figure-caption {
         margin-top: 8px;
         color: var(--muted);
@@ -423,7 +471,7 @@
       }
 
       .node.primary {
-        min-height: 206px;
+        min-height: 178px;
         border-color: rgba(36, 124, 119, 0.45);
         background: var(--teal-soft);
         text-align: center;
@@ -557,12 +605,12 @@
 
       .results-evidence {
         display: grid;
-        grid-template-columns: minmax(230px, 0.62fr) minmax(520px, 1.38fr);
+        grid-template-columns: minmax(280px, 0.9fr) minmax(280px, 0.72fr);
         gap: 14px;
         align-items: start;
       }
 
-      .results-evidence .paper-figure {
+      .results-evidence .paper-thumb {
         margin: 0;
       }
 
@@ -596,7 +644,7 @@
 
       .result-value {
         color: var(--ink);
-        font-size: clamp(24px, 3vw, 34px);
+        font-size: clamp(23px, 2.4vw, 30px);
         font-weight: 850;
         line-height: 1.05;
         text-align: right;
@@ -665,10 +713,9 @@
       @media (max-width: 980px) {
         .hero,
         .pipeline,
-        .system-diagram,
         .study-design,
-        .loop-diagram,
         .finding-grid,
+        .evidence-layout,
         .figure-callouts,
         .results-evidence {
           grid-template-columns: 1fr;
@@ -690,6 +737,14 @@
 
         .author {
           text-align: left;
+        }
+
+        .system-diagram {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .loop-diagram {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
         }
       }
 
@@ -716,6 +771,14 @@
 
         .layer-name {
           min-height: 44px;
+        }
+
+        .system-diagram {
+          grid-template-columns: 1fr;
+        }
+
+        .loop-diagram {
+          grid-template-columns: 1fr;
         }
       }
     </style>
@@ -787,46 +850,87 @@
         </article>
 
         <article class="panel span-12">
-          <h2>Accountability Coaching Service Pattern</h2>
-          <figure class="paper-figure detailed">
-            <img src="assets/acsp-model.png" alt="ACSP model showing foundational, operational, and regulatory accountability coaching layers" />
-            <figcaption class="figure-caption">Figure 3 from the thesis: the practice-based service pattern distilled from accountability coaching interviews.</figcaption>
-          </figure>
-          <div class="figure-callouts" aria-label="ACSP reading guide">
-            <div class="figure-callout">
-              <b>Foundational</b>
-              <span>Needs alignment, trust building, and coaching parameters before intervention begins.</span>
+          <div class="section-heading">
+            <h2>Accountability Coaching Service Pattern</h2>
+            <p class="section-copy">The thesis contribution is not the full diagram itself, but the service logic behind it: accountability support has to establish trust, operate across the task lifecycle, and adapt roles when the student context changes.</p>
+          </div>
+          <div class="evidence-layout">
+            <div class="layer-map" aria-label="Readable ACSP summary">
+              <div class="layer-band foundational">
+                <div class="layer-name">Foundational</div>
+                <div class="layer-body">
+                  <span class="pill">needs alignment</span>
+                  <span class="pill">trust building</span>
+                  <span class="pill">transparent coaching boundaries</span>
+                </div>
+              </div>
+              <div class="layer-band operational">
+                <div class="layer-name">Operational</div>
+                <div class="layer-body">
+                  <span class="pill">schedule planning</span>
+                  <span class="pill">flexible task tracking</span>
+                  <span class="pill">knowledge support</span>
+                  <span class="pill">emotional support</span>
+                </div>
+              </div>
+              <div class="layer-band regulatory">
+                <div class="layer-name">Regulatory</div>
+                <div class="layer-body">
+                  <span class="pill">expert role</span>
+                  <span class="pill">coach role</span>
+                  <span class="pill">mentor role</span>
+                  <span class="pill">partner role</span>
+                  <span class="pill">contextual adaptation</span>
+                </div>
+              </div>
             </div>
-            <div class="figure-callout">
-              <b>Operational</b>
-              <span>Planning, tracking, guidance, knowledge support, and emotional support across the task lifecycle.</span>
-            </div>
-            <div class="figure-callout">
-              <b>Regulatory</b>
-              <span>Role and tone adaptation when progress, emotion, or task difficulty changes.</span>
-            </div>
+            <figure class="paper-thumb tall">
+              <a href="assets/acsp-model.png" target="_blank" rel="noreferrer">
+                <img src="assets/acsp-model.png" alt="ACSP model showing foundational, operational, and regulatory accountability coaching layers" />
+              </a>
+              <figcaption class="figure-caption">Original thesis Figure 3, kept as supporting evidence. Click to open the full model.</figcaption>
+            </figure>
           </div>
         </article>
 
         <article class="panel span-12">
-          <h2>System Architecture</h2>
-          <figure class="paper-figure detailed">
-            <img src="assets/technical-architecture.png" alt="Technical architecture diagram of the AI coach with central coordinator and support agents" />
-            <figcaption class="figure-caption">Figure 4 from the thesis: the LLM-powered multi-agent architecture that operationalizes the ACSP model.</figcaption>
-          </figure>
-          <div class="figure-callouts" aria-label="Architecture reading guide">
-            <div class="figure-callout">
-              <b>Central Coordinator</b>
-              <span>Routes intent, maintains shared state, aggregates responses, and coordinates modules.</span>
+          <div class="section-heading">
+            <h2>System Architecture</h2>
+            <p class="section-copy">The prototype turns the service pattern into a stateful conversational system: user signals update shared context, a coordinator routes intent, and specialized modules generate bounded coaching support.</p>
+          </div>
+          <div class="evidence-layout">
+            <div class="system-diagram" aria-label="Readable system architecture summary">
+              <div class="diagram-lane">
+                <span class="diagram-label">Student Signals</span>
+                <div class="node"><b>Profile</b><span>goals, constraints, preferences</span></div>
+                <div class="node"><b>Check-ins</b><span>progress, blockers, emotion</span></div>
+              </div>
+              <div class="diagram-lane">
+                <span class="diagram-label">State</span>
+                <div class="node"><b>Shared Memory</b><span>plans, task history, commitments</span></div>
+                <div class="node"><b>Context Signals</b><span>urgency, risk, affect, workload</span></div>
+              </div>
+              <div class="diagram-lane">
+                <span class="diagram-label">Coordinator</span>
+                <div class="node primary"><b>Central Coordinator</b><span>classifies intent, selects support mode, updates state, and combines module outputs into one coach response.</span></div>
+              </div>
+              <div class="diagram-lane">
+                <span class="diagram-label">Support Modules</span>
+                <div class="module-grid">
+                  <div class="module"><b>Planning</b><span>schedule and task blocks</span></div>
+                  <div class="module"><b>Tracking</b><span>follow-up and reminders</span></div>
+                  <div class="module"><b>Guidance</b><span>task decomposition</span></div>
+                  <div class="module"><b>Knowledge</b><span>resource suggestions</span></div>
+                  <div class="module"><b>Emotion</b><span>supportive reframing</span></div>
+                </div>
+              </div>
             </div>
-            <div class="figure-callout">
-              <b>Five Support Agents</b>
-              <span>Schedule planning, task tracking, task guidance, knowledge support, and emotional support.</span>
-            </div>
-            <div class="figure-callout">
-              <b>Global Adaptation</b>
-              <span>Emotional state signals can adjust planning, reminders, and guidance strictness.</span>
-            </div>
+            <figure class="paper-thumb">
+              <a href="assets/technical-architecture.png" target="_blank" rel="noreferrer">
+                <img src="assets/technical-architecture.png" alt="Technical architecture diagram of the AI coach with central coordinator and support agents" />
+              </a>
+              <figcaption class="figure-caption">Original thesis Figure 4, kept as the detailed implementation reference.</figcaption>
+            </figure>
           </div>
         </article>
 
@@ -841,7 +945,7 @@
           </div>
         </article>
 
-        <article class="panel span-6">
+        <article class="panel span-8">
           <h2>Study Design</h2>
           <div class="study-design" aria-label="Study design diagram">
             <div class="study-col">
@@ -891,15 +995,17 @@
                     <span class="result-label">Effect size</span>
                     <span class="result-detail">partial eta squared from ANCOVA</span>
                   </div>
-                  <strong class="result-value">ηp² = .504</strong>
+                  <strong class="result-value">.504</strong>
                   <div class="bar-track"><span class="bar violet" style="--value: 77%"></span></div>
                 </div>
               </div>
               <p class="result-note">The AI coach produced a lower adjusted post-test PASS score than no intervention, mean difference -6.08, 95% CI [-8.67, -3.48].</p>
             </div>
-            <figure class="paper-figure detailed">
-              <img src="assets/pass-results.png" alt="PASS score result plots comparing AI coach, human coach, and no intervention conditions" />
-              <figcaption class="figure-caption">Figure 5 from the thesis: pre-post trajectories and post-test PASS distributions by group.</figcaption>
+            <figure class="paper-thumb">
+              <a href="assets/pass-results.png" target="_blank" rel="noreferrer">
+                <img src="assets/pass-results.png" alt="PASS score result plots comparing AI coach, human coach, and no intervention conditions" />
+              </a>
+              <figcaption class="figure-caption">Original thesis Figure 5, included because it directly supports the quantitative claim. Click to enlarge.</figcaption>
             </figure>
           </div>
         </article>
