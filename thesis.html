@@ -337,6 +337,62 @@
         font-weight: 700;
       }
 
+      .paper-figure {
+        margin: 12px 0 0;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #ffffff;
+        padding: 10px;
+        overflow-x: auto;
+        overflow-y: hidden;
+      }
+
+      .paper-figure img {
+        display: block;
+        width: 100%;
+        height: auto;
+        border-radius: 6px;
+      }
+
+      .paper-figure.detailed img {
+        min-width: 760px;
+      }
+
+      .figure-caption {
+        margin-top: 8px;
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.4;
+      }
+
+      .figure-callouts {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 10px;
+        margin-top: 12px;
+      }
+
+      .figure-callout {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #fbfcfc;
+        padding: 12px;
+      }
+
+      .figure-callout b {
+        display: block;
+        color: var(--ink);
+        font-size: 13px;
+      }
+
+      .figure-callout span {
+        display: block;
+        margin-top: 5px;
+        color: var(--muted);
+        font-size: 12px;
+        line-height: 1.35;
+      }
+
       .system-diagram {
         display: grid;
         grid-template-columns: 1fr 1.05fr 1.45fr 1fr;
@@ -499,6 +555,17 @@
         gap: 10px;
       }
 
+      .results-evidence {
+        display: grid;
+        grid-template-columns: minmax(230px, 0.62fr) minmax(520px, 1.38fr);
+        gap: 14px;
+        align-items: start;
+      }
+
+      .results-evidence .paper-figure {
+        margin: 0;
+      }
+
       .result-card {
         display: grid;
         grid-template-columns: minmax(120px, 0.9fr) minmax(120px, 0.75fr);
@@ -601,7 +668,9 @@
         .system-diagram,
         .study-design,
         .loop-diagram,
-        .finding-grid {
+        .finding-grid,
+        .figure-callouts,
+        .results-evidence {
           grid-template-columns: 1fr;
         }
 
@@ -719,81 +788,44 @@
 
         <article class="panel span-12">
           <h2>Accountability Coaching Service Pattern</h2>
-          <div class="layer-map" aria-label="ACSP layer model">
-            <div class="layer-band foundational">
-              <div class="layer-name">Foundational Layer</div>
-              <div class="layer-body">
-                <span class="pill">needs alignment</span>
-                <span class="pill">trust building</span>
-                <span class="pill">service boundaries</span>
-                <span class="pill">supervision intensity</span>
-                <span class="pill">academic context</span>
-              </div>
+          <figure class="paper-figure detailed">
+            <img src="assets/acsp-model.png" alt="ACSP model showing foundational, operational, and regulatory accountability coaching layers" />
+            <figcaption class="figure-caption">Figure 3 from the thesis: the practice-based service pattern distilled from accountability coaching interviews.</figcaption>
+          </figure>
+          <div class="figure-callouts" aria-label="ACSP reading guide">
+            <div class="figure-callout">
+              <b>Foundational</b>
+              <span>Needs alignment, trust building, and coaching parameters before intervention begins.</span>
             </div>
-            <div class="layer-band operational">
-              <div class="layer-name">Operational Layer</div>
-              <div class="layer-body">
-                <span class="pill">schedule planning</span>
-                <span class="pill">task tracking</span>
-                <span class="pill">task guidance</span>
-                <span class="pill">knowledge support</span>
-                <span class="pill">emotional support</span>
-                <span class="pill">Da Ka check-ins</span>
-              </div>
+            <div class="figure-callout">
+              <b>Operational</b>
+              <span>Planning, tracking, guidance, knowledge support, and emotional support across the task lifecycle.</span>
             </div>
-            <div class="layer-band regulatory">
-              <div class="layer-name">Regulatory Layer</div>
-              <div class="layer-body">
-                <span class="pill">role adaptation</span>
-                <span class="pill">tone adaptation</span>
-                <span class="pill">load reduction</span>
-                <span class="pill">reminder calibration</span>
-                <span class="pill">risk boundary</span>
-              </div>
+            <div class="figure-callout">
+              <b>Regulatory</b>
+              <span>Role and tone adaptation when progress, emotion, or task difficulty changes.</span>
             </div>
           </div>
         </article>
 
-        <article class="panel span-8">
+        <article class="panel span-12">
           <h2>System Architecture</h2>
-          <div class="system-diagram" aria-label="System architecture diagram">
-            <div class="diagram-lane">
-              <div class="diagram-label">Input</div>
-              <div class="node">
-                <b>User Turn</b>
-                <span>task, emotion, question, check-in, or planning request</span>
-              </div>
-              <div class="node">
-                <b>Intent Router</b>
-                <span>selects relevant coach capability</span>
-              </div>
+          <figure class="paper-figure detailed">
+            <img src="assets/technical-architecture.png" alt="Technical architecture diagram of the AI coach with central coordinator and support agents" />
+            <figcaption class="figure-caption">Figure 4 from the thesis: the LLM-powered multi-agent architecture that operationalizes the ACSP model.</figcaption>
+          </figure>
+          <div class="figure-callouts" aria-label="Architecture reading guide">
+            <div class="figure-callout">
+              <b>Central Coordinator</b>
+              <span>Routes intent, maintains shared state, aggregates responses, and coordinates modules.</span>
             </div>
-            <div class="diagram-lane">
-              <div class="diagram-label">State</div>
-              <div class="node">
-                <b>Shared Memory</b>
-                <span>goals, profile, tasks, schedule, check-ins</span>
-              </div>
-              <div class="node">
-                <b>Adaptive Signals</b>
-                <span>progress, stress, morale, energy, self-efficacy</span>
-              </div>
+            <div class="figure-callout">
+              <b>Five Support Agents</b>
+              <span>Schedule planning, task tracking, task guidance, knowledge support, and emotional support.</span>
             </div>
-            <div class="diagram-lane">
-              <div class="diagram-label">Coordination</div>
-              <div class="node primary">
-                <b>Central Coordinator</b>
-                <span>orchestrates modules, updates state, aggregates responses, and enforces boundaries.</span>
-              </div>
-            </div>
-            <div class="diagram-lane">
-              <div class="diagram-label">Output</div>
-              <div class="module-grid">
-                <div class="module"><b>Plan</b><span>blocks and priorities</span></div>
-                <div class="module"><b>Track</b><span>reminders and check-ins</span></div>
-                <div class="module"><b>Guide</b><span>next step and reflection</span></div>
-                <div class="module"><b>Support</b><span>emotion-sensitive response</span></div>
-              </div>
+            <div class="figure-callout">
+              <b>Global Adaptation</b>
+              <span>Emotional state signals can adjust planning, reminders, and guidance strictness.</span>
             </div>
           </div>
         </article>
@@ -833,35 +865,43 @@
           </div>
         </article>
 
-        <article class="panel span-6">
+        <article class="panel span-12">
           <h2>Evaluation Results</h2>
-          <div class="result-metrics" aria-label="Evaluation results">
-            <div class="result-card">
-              <div>
-                <span class="result-label">AI coach PASS reduction</span>
-                <span class="result-detail">within-group decrease over the intervention</span>
+          <div class="results-evidence">
+            <div>
+              <div class="result-metrics" aria-label="Evaluation results">
+                <div class="result-card">
+                  <div>
+                    <span class="result-label">AI coach PASS reduction</span>
+                    <span class="result-detail">within-group decrease over the intervention</span>
+                  </div>
+                  <strong class="result-value">17.71%</strong>
+                  <div class="bar-track"><span class="bar" style="--value: 71%"></span></div>
+                </div>
+                <div class="result-card">
+                  <div>
+                    <span class="result-label">ANCOVA intervention effect</span>
+                    <span class="result-detail">post-test PASS across study conditions</span>
+                  </div>
+                  <strong class="result-value">p &lt; .001</strong>
+                  <div class="bar-track"><span class="bar coral" style="--value: 86%"></span></div>
+                </div>
+                <div class="result-card">
+                  <div>
+                    <span class="result-label">Effect size</span>
+                    <span class="result-detail">partial eta squared from ANCOVA</span>
+                  </div>
+                  <strong class="result-value">ηp² = .504</strong>
+                  <div class="bar-track"><span class="bar violet" style="--value: 77%"></span></div>
+                </div>
               </div>
-              <strong class="result-value">17.71%</strong>
-              <div class="bar-track"><span class="bar" style="--value: 71%"></span></div>
+              <p class="result-note">The AI coach produced a lower adjusted post-test PASS score than no intervention, mean difference -6.08, 95% CI [-8.67, -3.48].</p>
             </div>
-            <div class="result-card">
-              <div>
-                <span class="result-label">ANCOVA intervention effect</span>
-                <span class="result-detail">post-test PASS across study conditions</span>
-              </div>
-              <strong class="result-value">p &lt; .001</strong>
-              <div class="bar-track"><span class="bar coral" style="--value: 86%"></span></div>
-            </div>
-            <div class="result-card">
-              <div>
-                <span class="result-label">Effect size</span>
-                <span class="result-detail">partial eta squared from ANCOVA</span>
-              </div>
-              <strong class="result-value">ηp² = .504</strong>
-              <div class="bar-track"><span class="bar violet" style="--value: 77%"></span></div>
-            </div>
+            <figure class="paper-figure detailed">
+              <img src="assets/pass-results.png" alt="PASS score result plots comparing AI coach, human coach, and no intervention conditions" />
+              <figcaption class="figure-caption">Figure 5 from the thesis: pre-post trajectories and post-test PASS distributions by group.</figcaption>
+            </figure>
           </div>
-          <p class="result-note">The AI coach produced a lower adjusted post-test PASS score than no intervention, mean difference -6.08, 95% CI [-8.67, -3.48].</p>
         </article>
 
         <article class="panel span-12">
